@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Dominik Medecki - Game developer, logo designer, and website creator." />
+    <meta property="og:title" content="Dominik Medecki Portfolio" />
+    <meta property="og:image" content="Assets/your-thumbnail.png" />
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="CSS/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="Assets/favicon.png" />
+
+
+
+
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">MyPortfolio</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="blog/blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="contact">
+            <h1 data-aos="fade-up">Get in Touch</h1>
+            <p data-aos="fade-up" data-aos-delay="100">If you’d like to work together or just say hi, feel free to drop a message.</p>
+            <form class="contact-form" data-aos="fade-up" data-aos-delay="200" action="#" method="post">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your name" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Email@Email.com" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="6" placeholder="Your message here" required></textarea>
+                </div>
+
+                <button type="submit" class="cta-button">Send Message</button>
+            </form>
+            <div id="form-success" class="form-success hidden">
+                ✅ Thank you! Your message has been sent.
+            </div>
+
+            <!-- TODO: Integrate backend or API for form submission -->
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 Dominik Medecki. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="blog/blog.html">Blog</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.querySelector(".contact-form");
+            const successMsg = document.getElementById("form-success");
+            const overlay = document.getElementById("form-overlay");
+
+            form.addEventListener("submit", function(e) {
+                e.preventDefault();
+
+                const name = form.name.value.trim();
+                const email = form.email.value.trim();
+                const message = form.message.value.trim();
+
+                if (!name || !email || !message) {
+                    alert("Please fill in all fields.");
+                    return;
+                }
+
+                if (!email.includes('@') || !email.includes('.')) {
+                    alert("Please enter a valid email address.");
+                    return;
+                }
+
+                if (message.length < 10) {
+                    alert("Message should be at least 10 characters.");
+                    return;
+                }
+
+                // Optional: spam trap check
+                const botcheck = form.querySelector('[name="botcheck"]');
+                if (botcheck && botcheck.value !== "") {
+                    console.warn("Spam detected — message ignored.");
+                    return;
+                }
+                form.reset();
+                overlay.classList.add("visible");
+                setTimeout(() => {
+                    overlay.classList.remove("visible");
+                }, 5000);
+            });
+        });
+    </script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+</body>
+
+</html>
